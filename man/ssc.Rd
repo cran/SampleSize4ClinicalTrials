@@ -2,16 +2,16 @@
 % Please edit documentation in R/SampleSize4ClinicalTrials.R
 \name{ssc}
 \alias{ssc}
-\title{Sample Size Calculation for Mean and Proportion Comparisons in Phase 3 Clinical Trials}
+\title{Sample Size Calculation for the Comparison of Means or Proportions in Phase III Clinical Trials}
 \usage{
-ssc(cat=c("m","p"),design=c(1,2,3,4),ratio,alpha,power,sigma,p1,p2,theta,delta)
+ssc(cat=c("m","p"), design=c(1,2,3,4), ratio, alpha, power, sigma, p1, p2, theta, delta)
 }
 \arguments{
 \item{cat}{Type of the outcome for comparison.
 \cr "m"
-  \cr stands for means comparison.
+  \cr stands for the comparison of means.
 \cr "p"
-  \cr stands for proportions comparison.}
+  \cr stands for the comparison of proportions.}
 
 \item{design}{The design of the clinical trials.
 \cr 1
@@ -19,38 +19,38 @@ ssc(cat=c("m","p"),design=c(1,2,3,4),ratio,alpha,power,sigma,p1,p2,theta,delta)
 \cr 2
   \cr Superiority trial
 \cr 3
-  \cr Noninferiority trial
+  \cr Non-inferiority trial
 \cr 4
   \cr Equivalence trial.}
 
-\item{ratio}{The ratio between number of subjects in experimental drug and that in standard drug.}
+\item{ratio}{The ratio between the number of subjects in the treatment arm and that in the control arm.}
 
-\item{alpha}{Type 1 error rate}
+\item{alpha}{Type I error rate}
 
-\item{power}{Statistical power of the test (1-type 2 error rate)}
+\item{power}{Statistical power of the test (1-type II error rate)}
 
-\item{sigma}{The variance of observed outcomes in both arms (specified in means comparison for continuous outcomes)}
+\item{sigma}{The variance of observed outcomes in both arms (specified in the comparison of means for continuous outcomes)}
 
-\item{p1}{The response rate of the experimental drug (specified proportion comparison for binary outcomes)}
+\item{p1}{The response rate of the treatment arm (specified the comparison of proportions for binary outcomes)}
 
-\item{p2}{The response rate of the standard drug}
+\item{p2}{The response rate of the control arm}
 
-\item{theta}{The difference between means or proportions in two arms}
+\item{theta}{The difference between means or proportions in the two arms}
 
-\item{delta}{The prespecified noninferiority or equivalence margin in noninferiority or equivalence trials}
+\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority or equivalence trials}
 }
 \value{
 samplesize
 }
 \description{
-This package aims to calculate sample size for mean and proportion
-comparisons in phase 3 clinical trials.
+This function aims to calculate sample size for the comparison of means or proportions
+in Phase III clinical trials.
 }
 \examples{
-##Means comparison for continuous outcomes, a noninferiority trial with a noninferiority margin 0.5
-##the true treatment difference is assumed to be zero in noninferiority and equivalence trials
+##The comparison of means, a non-inferiority trial with a non-inferiority margin 0.5
+##the true treatment difference is assumed to be zero in non-inferiority and equivalence trials
 ssc(cat="m",design=3,ratio=1,alpha=0.05,power=0.9,sigma=1,theta=0,delta=0.5)
-##Proportions comparison for binary outcomes, a superiority trial
+##The comparison of proportions, a superiority trial
 ssc(cat="p",design=2,ratio=3,alpha=0.025,power=0.8,p1=0.4,p2=0.2,theta=0.2)
 }
 \references{
