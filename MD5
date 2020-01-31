@@ -1,6 +1,8 @@
-311d0b52fa1cba030fbc9399d259d681 *DESCRIPTION
-25dc3e2393dfd68ce1254bcb18369704 *NAMESPACE
-27ff45681a55fa2f97f23092767afba9 *R/SampleSize4ClinicalTrials.R
-5d3cc7dc8bebb796995d764da23afcc7 *R/manual_namespace_gen.R
-1cfe330bd156cb0302bb1f82790d0665 *man/SampleSize4ClinicalTrials.Rd
-ff38548ed92afb60c3cb5e95261cb99f *man/ssc.Rd
+47de07251643c4edfffdc0e1cdba2928 *DESCRIPTION
+25cb611dca5c39f079e2acb8a50538b0 *NAMESPACE
+210365ce175928776f23cffd55327848 *R/manual_namespace_gen.R
+f198b9487387b5593bc828259c90f2dc *R/ssc_meancomp.R
+de954fc766075acd0f730c2479140498 *R/ssc_propcomp.R
+e4c6cbf40a57046a021660d10f3a9346 *man/SampleSize4ClinicalTrials.Rd
+9535bd64598bb73754db7720eb899d64 *man/ssc_meancomp.Rd
+d29fe488e776fbc1d9a73688612d81af *man/ssc_propcomp.Rd
