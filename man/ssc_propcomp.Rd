@@ -29,7 +29,7 @@ ssc_propcomp(design=c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta)
 
 \item{theta}{The difference between proportions in the two arms}
 
-\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority or equivalence trials}
+\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials}
 }
 \value{
 samplesize
@@ -40,7 +40,7 @@ in Phase III clinical trials.
 }
 \examples{
 ##The comparison of proportions, a superiority trial
-ssc_propcomp(design=2,ratio=3,alpha=0.025,power=0.8,p1=0.4,p2=0.2,theta=0.2)
+ssc_propcomp(design=2, ratio=3, alpha=0.025, power=0.8, p1=0.4, p2=0.2, theta=0.2)
 }
 \references{
 Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.

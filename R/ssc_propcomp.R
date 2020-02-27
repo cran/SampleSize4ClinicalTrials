@@ -18,7 +18,7 @@
 #' @param p1 The response rate of the treatment arm
 #' @param p2 The response rate of the control arm
 #' @param theta The difference between proportions in the two arms
-#' @param delta The prespecified non-inferiority or equivalence margin in non-inferiority or equivalence trials
+#' @param delta The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials
 #'
 #' @return samplesize
 #'
@@ -28,13 +28,13 @@
 #'
 #' @examples
 #' ##The comparison of proportions, a superiority trial
-#' ssc_propcomp(design=2,ratio=3,alpha=0.025,power=0.8,p1=0.4,p2=0.2,theta=0.2)
+#' ssc_propcomp(design=2, ratio=3, alpha=0.025, power=0.8, p1=0.4, p2=0.2, theta=0.2)
 #' @references Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
 #'
 #' @export
 
 ##Sample size calculation for the comparison of proportions
-ssc_propcomp<-function(design=c(1,2,3,4),ratio,alpha,power,p1=0,p2=0,theta,delta){
+ssc_propcomp<-function(design = c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta){
   if (!(design %in% 1:4))
     stop("Unrecognized study design, please select from: 1. Test for equility, 2. Superiority trial,
          3. Non-inferiority trial, 4. Equivalence trial")
@@ -62,7 +62,7 @@ ssc_propcomp<-function(design=c(1,2,3,4),ratio,alpha,power,p1=0,p2=0,theta,delta
   n3<-ratio*n4
 
   ##Calculate the sample size
-  samplesize<-paste("Sample size for the comparison of means","Sample size for the treatment arm:",n3,
-                    "Sample size for the control arm:",n4, sep = "\n")
+  samplesize<- data.frame(n3, n4)
+  colnames(samplesize) <- c("Treatment", "Control")
   return(samplesize)
 }

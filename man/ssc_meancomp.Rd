@@ -4,7 +4,7 @@
 \alias{ssc_meancomp}
 \title{Sample Size Calculation for the Comparison of Means in Phase III Clinical Trials}
 \usage{
-ssc_meancomp(design=c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
+ssc_meancomp(design = c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
 }
 \arguments{
 \item{design}{The design of the clinical trials.
@@ -27,7 +27,7 @@ ssc_meancomp(design=c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
 
 \item{theta}{The difference between means in the two arms}
 
-\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority or equivalence trials}
+\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials}
 }
 \value{
 samplesize
@@ -39,7 +39,7 @@ in Phase III clinical trials.
 \examples{
 ##The comparison of means, a non-inferiority trial with a non-inferiority margin 0.5
 ##the true treatment difference is assumed to be zero in non-inferiority and equivalence trials
-ssc_meancomp(design=3,ratio=1,alpha=0.05,power=0.9,sigma=1,theta=0,delta=0.5)
+ssc_meancomp(design=3, ratio=1, alpha=0.05, power=0.9, sigma=1, theta=0, delta=0.5)
 
 }
 \references{

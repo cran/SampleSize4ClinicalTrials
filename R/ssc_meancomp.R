@@ -17,25 +17,25 @@
 #' @param power Statistical power of the test (1-type II error rate)
 #' @param sigma The variance of observed outcomes in both arms
 #' @param theta The difference between means in the two arms
-#' @param delta The prespecified non-inferiority or equivalence margin in non-inferiority or equivalence trials
+#' @param delta The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials
 #'
 #' @return samplesize
 #'
-#' @usage ssc_meancomp(design=c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
+#' @usage ssc_meancomp(design = c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
 #'
 #' @importFrom stats qnorm
 #'
 #' @examples
 #' ##The comparison of means, a non-inferiority trial with a non-inferiority margin 0.5
 #' ##the true treatment difference is assumed to be zero in non-inferiority and equivalence trials
-#' ssc_meancomp(design=3,ratio=1,alpha=0.05,power=0.9,sigma=1,theta=0,delta=0.5)
+#' ssc_meancomp(design=3, ratio=1, alpha=0.05, power=0.9, sigma=1, theta=0, delta=0.5)
 #'
 #' @references Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
 #'
 #' @export
 
 ##Sample size calculation for mean comparison
-ssc_meancomp<-function(design=c(1,2,3,4), ratio, alpha, power, sigma ,theta, delta){
+ssc_meancomp<-function(design = c(1,2,3,4), ratio, alpha, power, sigma ,theta, delta){
   if (!(design %in% 1:4))
     stop("Unrecognized study design, please select from: 1. Test for equility, 2. Superiority trial,
          3. Non-inferiority trial, 4. Equivalence trial")
@@ -62,7 +62,7 @@ ssc_meancomp<-function(design=c(1,2,3,4), ratio, alpha, power, sigma ,theta, del
   n1<-ratio*n2
 
   ##Calculate the sample size
-  samplesize<-paste("Sample size for the comparison of means","Sample size for the treatment arm:",n1,
-                    "Sample size for the control arm:",n2, sep = "\n")
+  samplesize<- data.frame(n1, n2)
+  colnames(samplesize) <- c("Treatment", "Control")
   return(samplesize)
 }
