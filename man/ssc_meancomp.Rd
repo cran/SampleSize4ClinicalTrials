@@ -4,30 +4,30 @@
 \alias{ssc_meancomp}
 \title{Sample Size Calculation for the Comparison of Means in Phase III Clinical Trials}
 \usage{
-ssc_meancomp(design = c(1,2,3,4), ratio, alpha, power, sigma, theta, delta)
+ssc_meancomp(design, ratio, alpha, power, sd, theta, delta)
 }
 \arguments{
 \item{design}{The design of the clinical trials.
-\cr 1
+\cr 1L
   \cr Testing for equality
-\cr 2
+\cr 2L
   \cr Superiority trial
-\cr 3
+\cr 3L
   \cr Non-inferiority trial
-\cr 4
+\cr 4L
   \cr Equivalence trial.}
 
-\item{ratio}{The ratio between the number of subjects in the treatment arm and that in the control arm.}
+\item{ratio}{The ratio between the number of subjects in the treatment arm and that in the control arm}
 
 \item{alpha}{Type I error rate}
 
 \item{power}{Statistical power of the test (1-type II error rate)}
 
-\item{sigma}{The variance of observed outcomes in both arms}
+\item{sd}{The standard deviation of observed outcomes in both arms}
 
-\item{theta}{The difference between means in the two arms}
+\item{theta}{The true mean difference between two arms}
 
-\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials}
+\item{delta}{The prespecified superiority, non-inferiority or equivalence margin}
 }
 \value{
 samplesize
@@ -37,11 +37,12 @@ This function aims to calculate sample size for the comparison of means
 in Phase III clinical trials.
 }
 \examples{
-##The comparison of means, a non-inferiority trial with a non-inferiority margin 0.5
-##the true treatment difference is assumed to be zero in non-inferiority and equivalence trials
-ssc_meancomp(design=3, ratio=1, alpha=0.05, power=0.9, sigma=1, theta=0, delta=0.5)
+##The comparison of means, a non-inferiority trial and the non-inferiority margin is -0.05
+ssc_meancomp(design = 3L, ratio = 1, alpha = 0.05, power = 0.8, sd = 0.1, theta = 0, delta = -0.05)
 
 }
 \references{
-Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
+Chow S, Shao J, Wang H. 2008. Sample Size Calculations in Clinical Research. 2nd Ed. Chapman & Hall/CRC Biostatistics Series.
+
+Yin, G. 2012. Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
 }

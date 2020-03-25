@@ -4,17 +4,17 @@
 \alias{ssc_propcomp}
 \title{Sample Size Calculation for the Comparison of Proportions in Phase III Clinical Trials}
 \usage{
-ssc_propcomp(design=c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta)
+ssc_propcomp(design, ratio, alpha, power, p1, p2, delta)
 }
 \arguments{
 \item{design}{The design of the clinical trials.
-\cr 1
+\cr 1L
   \cr Testing for equality
-\cr 2
+\cr 2L
   \cr Superiority trial
-\cr 3
+\cr 3L
   \cr Non-inferiority trial
-\cr 4
+\cr 4L
   \cr Equivalence trial.}
 
 \item{ratio}{The ratio between the number of subjects in the treatment arm and that in the control arm.}
@@ -23,13 +23,11 @@ ssc_propcomp(design=c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta)
 
 \item{power}{Statistical power of the test (1-type II error rate)}
 
-\item{p1}{The response rate of the treatment arm}
+\item{p1}{The true mean response rate of the treatment arm}
 
-\item{p2}{The response rate of the control arm}
+\item{p2}{The true mean response rate of the control arm}
 
-\item{theta}{The difference between proportions in the two arms}
-
-\item{delta}{The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials}
+\item{delta}{The prespecified superiority, non-inferiority or equivalence margin}
 }
 \value{
 samplesize
@@ -39,9 +37,11 @@ This function aims to calculate sample size for the comparison of proportions
 in Phase III clinical trials.
 }
 \examples{
-##The comparison of proportions, a superiority trial
-ssc_propcomp(design=2, ratio=3, alpha=0.025, power=0.8, p1=0.4, p2=0.2, theta=0.2)
+##The comparison of proportions, an equivalence trial and the equivalence margin is 0.2
+ssc_propcomp(design = 4L, ratio = 1, alpha = 0.05, power = 0.8, p1 = 0.75, p2 = 0.80, delta = 0.2)
 }
 \references{
-Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
+Chow S, Shao J, Wang H. 2008. Sample Size Calculations in Clinical Research. 2nd Ed. Chapman & Hall/CRC Biostatistics Series.
+
+Yin, G. 2012. Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
 }

@@ -4,65 +4,68 @@
 #' in Phase III clinical trials.
 #'
 #' @param design The design of the clinical trials.
-#'   \cr 1
+#'   \cr 1L
 #'     \cr Testing for equality
-#'   \cr 2
+#'   \cr 2L
 #'     \cr Superiority trial
-#'   \cr 3
+#'   \cr 3L
 #'     \cr Non-inferiority trial
-#'   \cr 4
+#'   \cr 4L
 #'     \cr Equivalence trial.
 #' @param ratio The ratio between the number of subjects in the treatment arm and that in the control arm.
 #' @param alpha Type I error rate
 #' @param power Statistical power of the test (1-type II error rate)
-#' @param p1 The response rate of the treatment arm
-#' @param p2 The response rate of the control arm
-#' @param theta The difference between proportions in the two arms
-#' @param delta The prespecified non-inferiority or equivalence margin in non-inferiority (3) or equivalence (4) trials
+#' @param p1 The true mean response rate of the treatment arm
+#' @param p2 The true mean response rate of the control arm
+#' @param delta The prespecified superiority, non-inferiority or equivalence margin
 #'
 #' @return samplesize
 #'
-#' @usage ssc_propcomp(design=c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta)
+#' @usage ssc_propcomp(design, ratio, alpha, power, p1, p2, delta)
 #'
 #' @importFrom stats qnorm
 #'
 #' @examples
-#' ##The comparison of proportions, a superiority trial
-#' ssc_propcomp(design=2, ratio=3, alpha=0.025, power=0.8, p1=0.4, p2=0.2, theta=0.2)
-#' @references Yin, G. (2012). Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
+#' ##The comparison of proportions, an equivalence trial and the equivalence margin is 0.2
+#' ssc_propcomp(design = 4L, ratio = 1, alpha = 0.05, power = 0.8, p1 = 0.75, p2 = 0.80, delta = 0.2)
+#' @references
+#' Chow S, Shao J, Wang H. 2008. Sample Size Calculations in Clinical Research. 2nd Ed. Chapman & Hall/CRC Biostatistics Series.
+#'
+#' Yin, G. 2012. Clinical Trial Design: Bayesian and Frequentist Adaptive Methods. John Wiley & Sons.
 #'
 #' @export
 
 ##Sample size calculation for the comparison of proportions
-ssc_propcomp<-function(design = c(1,2,3,4), ratio, alpha, power, p1, p2, theta, delta){
-  if (!(design %in% 1:4))
-    stop("Unrecognized study design, please select from: 1. Test for equility, 2. Superiority trial,
-         3. Non-inferiority trial, 4. Equivalence trial")
-  ##Assign values to z_alpha
-  if (design==1)
-    z_alpha<-qnorm(1-(alpha/2))
-  else
-    z_alpha<-qnorm(1-alpha)
-  ##Assign values to z_beta
-  if (design == 4)
-    z_beta<-qnorm((1+power)/2)
-  else
-    z_beta<-qnorm(power)
-  ##Denominator
-  if (design %in% 1:2)
-    denom<-theta^2
-  if (design==3)
-    denom<-(theta+delta)^2
-  if (design==4)
-    denom<-(delta-abs(theta))^2
+ssc_propcomp<-function(design = c(1L,2L,3L,4L), ratio = 1, alpha = 0.05, power = 0.8, p1 = NULL, p2 = NULL, delta = NULL){
+  if (!(design %in% 1L:4L))
+    stop("Unrecognized study design, 1: Test for equility, 2: Superiority trial,
+         3: Non-inferiority trial, 4: Equivalence trial")
+  ##Numerator
+  if (design==1L) {
+    numerator <- (abs(qnorm(alpha/2)) + abs(qnorm(1- power)))^2 * (p1*(1 - p1)/ratio + p2*(1 - p2))
+  }
+  if (design%in%2L:3L) {
+    numerator <- (abs(qnorm(alpha)) + abs(qnorm(1- power)))^2 * (p1*(1 - p1)/ratio + p2*(1 - p2))
+  }
+  if (design==4L) {
+    numerator <- (abs(qnorm(alpha)) + abs(qnorm((1- power)/2)))^2 * (p1*(1 - p1)/ratio + p2*(1 - p2))
+  }
 
-  ##Pooled variance, n4 means number of sujects in the control arm
-  pbar<-(p1+p2)/2
-  n4<-ceiling(((1+1/ratio)*(z_alpha*sqrt(pbar*(1-pbar))+z_beta*sqrt((p1*(1-p1)+p2*(1-p2)*ratio)/(ratio+1)))^2)/denom)
+
+  ##Denominator
+  if (design == 1L) {
+    denom <- (p1 - p2)^2
+  }
+  if (design %in% 2L:3L)
+    denom <- ((p1 - p2) - delta)^2
+  if (design == 4L)
+    denom <- (delta - abs(p1 - p2))^2
+
+  ##n4 means number of sujects in the control arm
+  n4<-ceiling(numerator/denom)
   n3<-ratio*n4
 
   ##Calculate the sample size
-  samplesize<- data.frame(n3, n4)
-  colnames(samplesize) <- c("Treatment", "Control")
+  samplesize<- data.frame(Treatment = n3, Control = n4)
   return(samplesize)
 }
